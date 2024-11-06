@@ -14,6 +14,7 @@ public class Main {
             List<Pharmacy> pharmacies = GeneratorUtils.generatePharmacies(size / 10);
             List<PharmacyDrug> pharmacyDrugs = GeneratorUtils.generatePharmacyDrugs(size, pharmacies, drugs);
 
+
             System.out.println("\n###############################################################");
             System.out.println("Размер коллекции: " + size);
             System.out.println("-----------------------");
@@ -24,11 +25,13 @@ public class Main {
 
             System.out.println("Iteration: " + (endTime.toEpochMilli() - startTime.toEpochMilli()) + " мс");
 
+
             startTime = Instant.now();
             countThroughStream(pharmacyDrugs);
             endTime = Instant.now();
 
             System.out.println("Stream API : " + (endTime.toEpochMilli() - startTime.toEpochMilli()) + " мс");
+
 
             startTime = Instant.now();
             countThroughCustomCollector(pharmacyDrugs);
