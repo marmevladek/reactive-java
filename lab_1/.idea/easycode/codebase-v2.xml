@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
-    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/generator/DrugGenerator.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/generator/GeneratorUtils.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/generator/PharmacologicalActionGenerator.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/generator/PharmacyDrugGenerator.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/generator/PharmacyGenerator.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/model/ActionType.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/model/Drug.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/model/PharmacologicalAction.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/model/Pharmacy.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/model/PharmacyDrug.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/CustomCollector.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/src/main/java/Main.java;/Users/vladislavtezev/projects/java/reactive-java/lab_1/pom.xml" />
-  </component>
-</project>
