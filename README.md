@@ -28,23 +28,23 @@
 - **Score** - скорость выполнения
 
 ```
-Benchmark                          (delay)  (size)   Mode  Cnt     Score      Error  Units
-PharmacyDrugJMH.customSpliterator        0    5000  thrpt    6  9076,595 ± 1616,955  ops/s
-PharmacyDrugJMH.customSpliterator        0   50000  thrpt    6   733,463 ±   46,053  ops/s
-PharmacyDrugJMH.customSpliterator        0  250000  thrpt    6   154,142 ±    7,033  ops/s
-PharmacyDrugJMH.customSpliterator        1    5000  thrpt    6   554,515 ±   38,000  ops/s
-PharmacyDrugJMH.customSpliterator        1   50000  thrpt    6    52,834 ±    6,143  ops/s
-PharmacyDrugJMH.customSpliterator        1  250000  thrpt    6     8,838 ±    3,197  ops/s
-PharmacyDrugJMH.parallelStream           0    5000  thrpt    6  7827,192 ± 1191,936  ops/s
-PharmacyDrugJMH.parallelStream           0   50000  thrpt    6   655,500 ±   22,282  ops/s
-PharmacyDrugJMH.parallelStream           0  250000  thrpt    6    79,619 ±   27,289  ops/s
-PharmacyDrugJMH.parallelStream           1    5000  thrpt    6   491,452 ±   10,153  ops/s
-PharmacyDrugJMH.parallelStream           1   50000  thrpt    6    44,951 ±    5,216  ops/s
-PharmacyDrugJMH.parallelStream           1  250000  thrpt    6     9,659 ±    1,578  ops/s
-PharmacyDrugJMH.sequentialStream         0    5000  thrpt    6  4831,408 ±  486,203  ops/s
-PharmacyDrugJMH.sequentialStream         0   50000  thrpt    6   431,200 ±   13,482  ops/s
-PharmacyDrugJMH.sequentialStream         0  250000  thrpt    6    35,138 ±    2,400  ops/s
-PharmacyDrugJMH.sequentialStream         1    5000  thrpt    6    18,815 ±    0,306  ops/s
-PharmacyDrugJMH.sequentialStream         1   50000  thrpt    6     1,881 ±    0,018  ops/s
-PharmacyDrugJMH.sequentialStream         1  250000  thrpt    6     0,375 ±    0,003  ops/s
+Benchmark                                (delay)  (size)   Mode  Cnt     Score      Error  Units
+PharmacyDrugBenchmark.customSpliterator        0    5000  thrpt    6  9076,595 ± 1616,955  ops/s
+PharmacyDrugBenchmark.customSpliterator        0   50000  thrpt    6   733,463 ±   46,053  ops/s
+PharmacyDrugBenchmark.customSpliterator        0  250000  thrpt    6   154,142 ±    7,033  ops/s
+PharmacyDrugBenchmark.customSpliterator        1    5000  thrpt    6   554,515 ±   38,000  ops/s
+PharmacyDrugBenchmark.customSpliterator        1   50000  thrpt    6    52,834 ±    6,143  ops/s
+PharmacyDrugBenchmark.customSpliterator        1  250000  thrpt    6     8,838 ±    3,197  ops/s
+PharmacyDrugBenchmark.parallelStream           0    5000  thrpt    6  7827,192 ± 1191,936  ops/s
+PharmacyDrugBenchmark.parallelStream           0   50000  thrpt    6   655,500 ±   22,282  ops/s
+PharmacyDrugBenchmark.parallelStream           0  250000  thrpt    6    79,619 ±   27,289  ops/s
+PharmacyDrugBenchmark.parallelStream           1    5000  thrpt    6   491,452 ±   10,153  ops/s
+PharmacyDrugBenchmark.parallelStream           1   50000  thrpt    6    44,951 ±    5,216  ops/s
+PharmacyDrugBenchmark.parallelStream           1  250000  thrpt    6     9,659 ±    1,578  ops/s
+PharmacyDrugBenchmark.sequentialStream         0    5000  thrpt    6  4831,408 ±  486,203  ops/s
+PharmacyDrugBenchmark.sequentialStream         0   50000  thrpt    6   431,200 ±   13,482  ops/s
+PharmacyDrugBenchmark.sequentialStream         0  250000  thrpt    6    35,138 ±    2,400  ops/s
+PharmacyDrugBenchmark.sequentialStream         1    5000  thrpt    6    18,815 ±    0,306  ops/s
+PharmacyDrugBenchmark.sequentialStream         1   50000  thrpt    6     1,881 ±    0,018  ops/s
+PharmacyDrugBenchmark.sequentialStream         1  250000  thrpt    6     0,375 ±    0,003  ops/s
 ```
