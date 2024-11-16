@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@State(Scope.Thread)
+@State(Scope.Benchmark)
 @Fork(2)
 @Warmup(iterations = 2)
 @Measurement(iterations = 3)
