@@ -1,0 +1,89 @@
+# Директории сборки
+/bin/
+/build/
+/out/
+/target/
+
+# Конфигурационные файлы IDE
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Депенденси менеджеры
+### Maven ###
+/.mvn/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+### Gradle ###
+/.gradle/
+build/
+!gradle-wrapper.jar
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Операционная система
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Java-specific
+*.class
+*.jar
+*.war
+*.ear
+
+# Тестовые выходные файлы
+/test-output/
+*.stacktrace
+
+# Кэширование
+### Mac ###
+*.DS_Store
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Linux ###
+*~
+
+# Docker и контейнеры
+*.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Другие кэшированные файлы
+*.lock
+*.log
+*.idx
+*.seed
+*.pid
