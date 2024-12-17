@@ -1,0 +1,16 @@
+[submodule "lab_1"]
+	path = lab_1
+	url = https://github.com/marmevladek/reactive-java.git
+	branch = lab_1
+[submodule "lab_2"]
+	path = lab_2
+	url = https://github.com/marmevladek/reactive-java.git
+	branch = lab_2
+[submodule "lab_3"]
+	path = lab_3
+	url = https://github.com/marmevladek/reactive-java.git
+	branch = lab_3
+[submodule "project"]
+	path = project
+	url = https://github.com/marmevladek/reactive-java.git
+	branch = project
