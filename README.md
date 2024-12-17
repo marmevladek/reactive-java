@@ -21,8 +21,9 @@ PharmacyDrugBenchmark.rxJavaObservable            2    2000  thrpt    6    6,145
 
 ```
 Benchmark                             (delay)  (size)   Mode  Cnt   Score   Error  Units
-PharmacyDrugBenchmark.rxJavaFlowable        0    2000  thrpt    6  38,620 ± 0,182  ops/s
+PharmacyDrugBenchmark.rxJavaFlowable        0   10000  thrpt    6  38,585 ± 0,289  ops/s
 PharmacyDrugBenchmark.rxJavaFlowable        0   50000  thrpt    6  38,290 ± 0,339  ops/s
-PharmacyDrugBenchmark.rxJavaFlowable        0  100000  thrpt    6  37,669 ± 2,052  ops/s
-PharmacyDrugBenchmark.rxJavaFlowable        0  250000  thrpt    6  37,035 ± 2,042  ops/s
+PharmacyDrugBenchmark.rxJavaFlowable        0  100000  thrpt    6  38,056 ± 0,748  ops/s
+PharmacyDrugBenchmark.rxJavaFlowable        0  175000  thrpt    6  38,245 ± 0,148  ops/s
+PharmacyDrugBenchmark.rxJavaFlowable        0  250000  thrpt    6  37,277 ± 1,444  ops/s
 ```

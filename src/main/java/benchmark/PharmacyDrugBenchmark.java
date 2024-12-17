@@ -3,25 +3,20 @@ package benchmark;
 import generator.GeneratorUtils;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.observables.GroupedObservable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import model.ActionType;
 import model.Drug;
 import model.Pharmacy;
 import model.PharmacyDrug;
 import org.openjdk.jmh.annotations.*;
-import spliterator.PharmacyDrugSpliterator;
 import subscriber.CustomSubscriber;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @State(Scope.Benchmark)
 @Fork(2)
@@ -35,7 +30,7 @@ public class PharmacyDrugBenchmark {
     @Param({"0"})
     private long delay;
 
-    @Param({"2000", "50000", "100000", "250000"})
+    @Param({"10000", "50000", "100000", "175000", "250000"})
     private int size;
 
     @Setup(Level.Iteration)
