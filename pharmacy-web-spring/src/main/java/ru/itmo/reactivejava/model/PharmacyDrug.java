@@ -1,38 +1,63 @@
 package ru.itmo.reactivejava.model;
 
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.math.BigDecimal;
-
+@Table("pharmacy_drug")
 public class PharmacyDrug {
 
+    @Column("pharmacy_id")
+    private Long pharmacyId;
 
-    private final long pharmacyId;
+    @Column("drug_id")
+    private Long drugId;
 
-    private final long drugId;
+    @Column("count")
+    private int quantity;
 
-    private final BigDecimal price;
+    @Column("price")
+    private float price;
 
-    public PharmacyDrug(long pharmacyId, long drugId, BigDecimal price) {
+    public PharmacyDrug() {
+    }
+
+    public PharmacyDrug(Long pharmacyId, Long drugId, int quantity, float price) {
         this.pharmacyId = pharmacyId;
         this.drugId = drugId;
+        this.quantity = quantity;
         this.price = price;
     }
 
-
-    public long getPharmacyId() {
+    public Long getPharmacyId() {
         return pharmacyId;
     }
 
-    public long getDrugId() {
+    public void setPharmacyId(Long pharmacyId) {
+        this.pharmacyId = pharmacyId;
+    }
+
+    public Long getDrugId() {
         return drugId;
     }
 
-    public BigDecimal getPrice() {
+    public void setDrugId(Long drugId) {
+        this.drugId = drugId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getPrice() {
         return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Override
@@ -40,6 +65,7 @@ public class PharmacyDrug {
         return "PharmacyDrug{" +
                 "pharmacyId=" + pharmacyId +
                 ", drugId=" + drugId +
+                ", count=" + quantity +
                 ", price=" + price +
                 '}';
     }

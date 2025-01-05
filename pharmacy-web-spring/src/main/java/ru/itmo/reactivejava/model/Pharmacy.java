@@ -2,43 +2,55 @@ package ru.itmo.reactivejava.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Table("pharmacies")
 public class Pharmacy {
 
     @Id
-    private long id;
+    private Long id;
 
-    private final String name;
+    @Column("name")
+    private String name;
 
-    private final String address;
+    @Column("address")
+    private String address;
 
-//    private final List<PharmacyDrug> drugs = new ArrayList<>();
+    public Pharmacy() {
+    }
 
-    public Pharmacy(/*long id,*/ String name, String address) {
-//        this.id = id;
+    public Pharmacy(String name, String address) {
         this.name = name;
         this.address = address;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getAddress() {
         return address;
     }
 
-//    public List<PharmacyDrug> getDrugs() {
-//        return drugs;
-//    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public String toString() {
@@ -46,7 +58,7 @@ public class Pharmacy {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-//                ", drugs=" + drugs +
                 '}';
     }
 }
+

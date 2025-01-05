@@ -1,6 +1,8 @@
 package ru.itmo.reactivejava.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,19 +10,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Table("drugs")
 public class Drug {
+
     @Id
     private Long id;
-    private final String name;
-    private final LocalDate manufactureDate;
-    private final LocalDate expirationDate;
-    private final long pharmacologicalActionId;
-//    private final List<PharmacyDrug> pharmacies = new ArrayList<>();
-//    private final Set<PharmacyDrug> pharmacies = new HashSet<>();
 
+    @Column("name")
+    private String name;
 
-    public Drug(/*Long id,*/ String name, LocalDate manufactureDate, LocalDate expirationDate, long pharmacologicalActionId) {
-//        this.id = id;
+    @Column("manufacture_date")
+    private LocalDate manufactureDate;
+
+    @Column("expiration_date")
+    private LocalDate expirationDate;
+
+    @Column("pharmacological_action_id")
+    private Long pharmacologicalActionId;
+
+    public Drug() {
+    }
+
+    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate, Long pharmacologicalActionId) {
         this.name = name;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
@@ -31,29 +42,41 @@ public class Drug {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getManufactureDate() {
         return manufactureDate;
     }
 
+    public void setManufactureDate(LocalDate manufactureDate) {
+        this.manufactureDate = manufactureDate;
+    }
+
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public long getPharmacologicalActionId() {
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Long getPharmacologicalActionId() {
         return pharmacologicalActionId;
     }
 
-//    public List<PharmacyDrug> getPharmacies() {
-//        return pharmacies;
-//    }
-
-//    public Set<PharmacyDrug> getPharmacies() {
-//        return pharmacies;
-//    }
+    public void setPharmacologicalActionId(Long pharmacologicalActionId) {
+        this.pharmacologicalActionId = pharmacologicalActionId;
+    }
 
     @Override
     public String toString() {
