@@ -3,6 +3,7 @@ package ru.itmo.reactivejava.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
@@ -22,8 +23,9 @@ public class DrugService {
 
 
     public Mono<MessageResponse> addDrug(DrugRequest drugRequest) {
-        // юзается генератор
-        return null;
+        return Mono.fromSupplier(() -> {
+            return new MessageResponse("Drug added successfully!");
+        });
     }
 
 
