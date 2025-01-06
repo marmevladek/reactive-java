@@ -80,6 +80,7 @@ $RECYCLE.BIN/
 *.dockerignore
 Dockerfile
 docker-compose*.yml
+!service/**/docker-compose.yml
 
 # Другие кэшированные файлы
 *.lock
