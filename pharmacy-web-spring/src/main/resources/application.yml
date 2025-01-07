@@ -5,3 +5,16 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/pharmacy-web-spring
     username: postgres
+  jpa:
+    generate-ddl: true
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc:
+          core: DEBUG
+    io:
+      r2dbc:
+        spi:
+          Connection: DEBUG

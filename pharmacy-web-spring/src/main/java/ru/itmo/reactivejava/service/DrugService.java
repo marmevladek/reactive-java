@@ -3,8 +3,8 @@ package ru.itmo.reactivejava.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Mono;
+import ru.itmo.reactivejava.mapper.DrugMapper;
 import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
@@ -23,9 +23,9 @@ public class DrugService {
 
 
     public Mono<MessageResponse> addDrug(DrugRequest drugRequest) {
-        return Mono.fromSupplier(() -> {
-            return new MessageResponse("Drug added successfully!");
-        });
+
+        return drugRepository.save(DrugMapper.mapToDrug(drugRequest))
+                .map(savedDrug -> new MessageResponse("Лекарство успешно добавлено"));
     }
 
 
@@ -47,7 +47,4 @@ public class DrugService {
                 })
                 .then();
     }
-
-
-
 }
