@@ -13,6 +13,7 @@ CREATE TABLE pharmacy (
 
 CREATE TABLE pharmacy_drug (
                                pharmacy_id BIGINT REFERENCES pharmacy(id),
+                               count BIGINT NOT NULL,
                                drug_id BIGINT REFERENCES drug(id),
                                price DECIMAL(10, 2) NOT NULL,
                                PRIMARY KEY (pharmacy_id, drug_id)
