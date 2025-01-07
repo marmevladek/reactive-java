@@ -11,7 +11,7 @@ up:
 
 down:
 	@for service in $(shell ls $(SERVICES_DIR)); do \
-		$(COMPOSE) -f $(SERVICES_DIR)/$$service/docker-compose.yml down; \
+		$(COMPOSE) -f $(SERVICES_DIR)/$$service/docker-compose.yml down -v; \
 	done
 
 up-service:
