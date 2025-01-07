@@ -19,7 +19,4 @@ public class DrugRequest {
 
     @JsonProperty("expiration_date")
     private LocalDate expirationDate;
-
-    @JsonProperty("pharmacological_action_id")
-    private Long pharmacologicalActionId;
 }

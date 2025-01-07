@@ -32,14 +32,10 @@ public class Drug {
     @Column("expiration_date")
     private LocalDate expirationDate;
 
-    @Column("pharmacological_action_id")
-    private Long pharmacologicalActionId;
-
-    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate, Long pharmacologicalActionId) {
+    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate) {
         this.name = name;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
-        this.pharmacologicalActionId = pharmacologicalActionId;
     }
 
 }
