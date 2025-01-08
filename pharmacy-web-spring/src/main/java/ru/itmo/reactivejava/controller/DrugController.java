@@ -40,8 +40,9 @@ public class DrugController {
                 });
     }
 
-    @GetMapping("/drugs/getPrice/{pharmacyId}/{drugId}")
-    public Mono<ResponseEntity<Float>> findPrice(@PathVariable("pharmacyId") long pharmacyId, @PathVariable("drugId") long drugId) {
+    @GetMapping("/getPrice/{pharmacyId}/{drugId}")
+    public Mono<ResponseEntity<Float>> findPrice(@PathVariable("pharmacyId") long pharmacyId,
+                                                 @PathVariable("drugId") long drugId) {
         return drugService.findPrice(pharmacyId, drugId)
                 .map(ResponseEntity::ok)
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).build()));
