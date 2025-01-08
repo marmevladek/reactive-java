@@ -21,6 +21,6 @@ public class PharmacyDrug {
     @Column("count")
     private int quantity;
 
-    @Column("inital_count")
-    private int inital_quantity;
+    @Column("initial_count")
+    private int initial_quantity;
 }

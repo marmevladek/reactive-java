@@ -10,5 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PharmacyResponse {
-    private String message;
+    private Long id;
+    private String name;
 }

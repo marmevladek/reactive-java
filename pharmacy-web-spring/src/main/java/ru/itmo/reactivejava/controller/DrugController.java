@@ -13,9 +13,11 @@ import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.request.OrderRequest;
 import ru.itmo.reactivejava.payload.request.PharmacyDrugRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
+import ru.itmo.reactivejava.payload.response.PharmacyDrugResponse;
 import ru.itmo.reactivejava.service.DrugService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,7 +42,7 @@ public class DrugController {
                 });
     }
 
-    @GetMapping("/getPrice/{pharmacyId}/{drugId}")
+    @GetMapping("/drugs/getPrice/{pharmacyId}/{drugId}")
     public Mono<ResponseEntity<Float>> findPrice(@PathVariable("pharmacyId") long pharmacyId,
                                                  @PathVariable("drugId") long drugId) {
         return drugService.findPrice(pharmacyId, drugId)
@@ -48,7 +50,7 @@ public class DrugController {
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).build()));
     }
 
-    @PostMapping("/drugs/shipment/{pharmacyId}/{drugId}")
+    @PostMapping("/drugs/shipment")
     public Mono<ResponseEntity<MessageResponse>> addDrugInPharmacy(@RequestBody PharmacyDrugRequest pharmacyDrugRequest) {
         return drugService.addDrugToPharmacy(pharmacyDrugRequest)
                 .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
@@ -57,6 +59,13 @@ public class DrugController {
                             .status(HttpStatus.BAD_REQUEST)
                             .body(new MessageResponse("Error: " + ex.getMessage())));
                 });
+    }
+
+    @GetMapping("/drugs/{pharmacyId}")
+    public Mono<ResponseEntity<List<PharmacyDrugResponse>>> getDrugsFromPharmacy(@PathVariable("pharmacyId") long pharmacyId) {
+        return drugService.getDrugsFromPharmacy(pharmacyId)
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping("/order/createOrder")

@@ -19,7 +19,7 @@ CREATE TABLE pharmacy_drug (
                                count BIGINT NOT NULL,
                                drug_id BIGINT REFERENCES drug(id),
                                PRIMARY KEY (pharmacy_id, drug_id),
-                               inital_count BIGINT NOT NULL
+                               initial_count BIGINT NOT NULL
 );
 
 CREATE OR REPLACE FUNCTION calculate_distance(lat1 FLOAT, lon1 FLOAT, lat2 FLOAT, lon2 FLOAT)

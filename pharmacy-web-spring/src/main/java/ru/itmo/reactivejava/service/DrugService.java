@@ -1,24 +1,22 @@
 package ru.itmo.reactivejava.service;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.mapper.DrugMapper;
 import ru.itmo.reactivejava.mapper.PharmacyDrugMapper;
-import ru.itmo.reactivejava.mapper.PharmacyMapper;
-import ru.itmo.reactivejava.model.Drug;
-import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.request.PharmacyDrugRequest;
+import ru.itmo.reactivejava.payload.response.DrugResponse;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
+import ru.itmo.reactivejava.payload.response.PharmacyDrugResponse;
 import ru.itmo.reactivejava.repository.DrugRepository;
 import ru.itmo.reactivejava.repository.PharmacyDrugRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class DrugService {
@@ -42,6 +40,19 @@ public class DrugService {
                 .map(savedDrug -> new MessageResponse("Поставка успешно добавлена"));
     }
 
+    public Mono<List<PharmacyDrugResponse>> getDrugsFromPharmacy(long id) {
+        return pharmacyDrugRepository.findByPharmacyId(id)
+                .flatMap(pharmacyDrug ->
+                        drugRepository.findById(pharmacyDrug.getDrugId())
+                                .map(drug -> {
+                                    DrugResponse drugResponse = DrugMapper.mapToDrugResponse(drug);
+                                    return PharmacyDrugMapper.mapToPharmacyDrugResponse(pharmacyDrug, drugResponse);
+                                })
+                )
+                .collectList();
+    }
+
+
     public Mono<Float> findPrice(long pharmacyId, long drugId) {
         return drugRepository.findById(drugId)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(
@@ -55,7 +66,7 @@ public class DrugService {
                             double basePrice = drug.getPrice();
 
                             double S  = pharmacyDrug.getQuantity();
-                            double S0 = pharmacyDrug.getInital_quantity();
+                            double S0 = pharmacyDrug.getInitial_quantity();
 
                             LocalDate now = LocalDate.now();
                             long d = ChronoUnit.DAYS.between(now, drug.getExpirationDate());

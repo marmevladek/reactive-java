@@ -10,5 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PharmacyDrugResponse {
-    private String message;
+    private DrugResponse drugResponse;
+    private int quantity;
+    private int initial_quantity;
 }
