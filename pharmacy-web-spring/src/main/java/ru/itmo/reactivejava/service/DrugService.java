@@ -34,6 +34,10 @@ public class DrugService {
                 .map(savedDrug -> new MessageResponse("Лекарство успешно добавлено"));
     }
 
+    public Mono<MessageResponse> addDrugToPharmacy(PharmacyDrugRequest pharmacyDrugRequest) {
+        return pharmacyDrugRepository.save(PharmacyDrugMapper.mapPharmacyDrug(pharmacyDrugRequest))
+                .map(savedDrug -> new MessageResponse("Поставка успешно добавлена"));
+    }
 
     public Mono<Float> findPrice(long pharmacyId, long drugId) {
         return drugRepository.findById(drugId)

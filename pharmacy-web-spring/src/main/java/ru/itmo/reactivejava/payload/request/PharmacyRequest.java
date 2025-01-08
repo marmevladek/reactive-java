@@ -16,4 +16,10 @@ public class PharmacyRequest {
 
     @JsonProperty("address")
     private String address;
+
+    @JsonProperty("latitude")
+    private float latitude;
+
+    @JsonProperty("longitude")
+    private float longitude;
 }
