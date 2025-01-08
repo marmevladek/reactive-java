@@ -16,4 +16,5 @@ public class DrugResponse {
     private String name;
     private LocalDate manufactureDate;
     private LocalDate expirationDate;
+    private float price;
 }

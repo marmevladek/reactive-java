@@ -21,7 +21,8 @@ public class DrugMapper {
                 drug.getId(),
                 drug.getName(),
                 drug.getManufactureDate(),
-                drug.getExpirationDate()
+                drug.getExpirationDate(),
+                drug.getPrice()
         );
     }
 }
