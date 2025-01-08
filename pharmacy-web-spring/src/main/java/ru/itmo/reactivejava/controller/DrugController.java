@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.request.OrderRequest;
+import ru.itmo.reactivejava.payload.request.PharmacyDrugRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
 import ru.itmo.reactivejava.service.DrugService;
 
@@ -44,6 +45,17 @@ public class DrugController {
         return drugService.findPrice(pharmacyId, drugId)
                 .map(ResponseEntity::ok)
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).build()));
+    }
+
+    @PostMapping("/drugs/shipment/{pharmacyId}/{drugId}")
+    public Mono<ResponseEntity<MessageResponse>> addDrugInPharmacy(@RequestBody PharmacyDrugRequest pharmacyDrugRequest) {
+        return drugService.addDrugToPharmacy(pharmacyDrugRequest)
+                .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
+                .onErrorResume(ex -> {
+                    return Mono.just(ResponseEntity
+                            .status(HttpStatus.BAD_REQUEST)
+                            .body(new MessageResponse("Error: " + ex.getMessage())));
+                });
     }
 
     @PostMapping("/order/createOrder")

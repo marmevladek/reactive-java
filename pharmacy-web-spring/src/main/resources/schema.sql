@@ -16,5 +16,6 @@ CREATE TABLE pharmacy_drug (
                                pharmacy_id BIGINT REFERENCES pharmacy(id),
                                count BIGINT NOT NULL,
                                drug_id BIGINT REFERENCES drug(id),
-                               PRIMARY KEY (pharmacy_id, drug_id)
+                               PRIMARY KEY (pharmacy_id, drug_id),
+                               inital_count BIGINT NOT NULL,
 );
