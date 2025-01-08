@@ -1,12 +1,10 @@
 package ru.itmo.reactivejava.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -20,7 +18,6 @@ import java.time.LocalDate;
 public class Drug {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column("name")
@@ -32,10 +29,13 @@ public class Drug {
     @Column("expiration_date")
     private LocalDate expirationDate;
 
-    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate) {
+    @Column("price")
+    private float price;
+
+    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate, float price) {
         this.name = name;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
+        this.price = price;
     }
-
 }

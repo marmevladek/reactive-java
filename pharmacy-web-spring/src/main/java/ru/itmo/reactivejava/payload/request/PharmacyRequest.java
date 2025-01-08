@@ -10,16 +10,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DrugRequest {
-
+public class PharmacyRequest {
+    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("manufacture_date")
-    private LocalDate manufactureDate;
+    @JsonProperty("address")
+    private String address;
 
-    @JsonProperty("expiration_date")
-    private LocalDate expirationDate;
+    @JsonProperty("latitude")
+    private float latitude;
 
-    @JsonProperty("price")
-    private float price;
+    @JsonProperty("longitude")
+    private float longitude;
 }

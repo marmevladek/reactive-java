@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("pharmacies")
+@Table("pharmacy")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,9 +22,17 @@ public class Pharmacy {
     @Column("address")
     private String address;
 
-    public Pharmacy(String name, String address) {
+    @Column("latitude")
+    private float latitude;
+
+    @Column("longitude")
+    private float longitude;
+
+    public Pharmacy(String name, String address,float latitude, float longitude) {
         this.name = name;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 }

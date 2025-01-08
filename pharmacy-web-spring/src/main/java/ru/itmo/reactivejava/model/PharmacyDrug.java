@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @ToString
 public class PharmacyDrug {
-
+    
     @Column("pharmacy_id")
     private Long pharmacyId;
 
@@ -21,6 +21,6 @@ public class PharmacyDrug {
     @Column("count")
     private int quantity;
 
-    @Column("price")
-    private float price;
+    @Column("inital_count")
+    private int inital_quantity;
 }
