@@ -69,17 +69,4 @@ public class DrugController {
                     }
                 });
     }
-
-
-
-
-
-
-//    метод изменения количества юзается внутри создания заказа
-//
-//    @PutMapping("/drugs/reduceQuantity/{pharmacyId}/{drugId}/quantity")
-//    @ResponseStatus(HttpStatus.OK)
-//    public Mono<Void> reduceQuantity(@PathVariable("pharmacyId") long pharmacyId, @PathVariable("drugId") long drugId, @RequestParam int quantity) {
-//        return drugService.reduceQuantity(pharmacyId, drugId, quantity);
-//    }
 }
