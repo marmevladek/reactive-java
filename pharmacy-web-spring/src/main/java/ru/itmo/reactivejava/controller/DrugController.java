@@ -1,13 +1,21 @@
 package ru.itmo.reactivejava.controller;
 
+import jakarta.transaction.Transactional;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.request.OrderRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
 import ru.itmo.reactivejava.service.DrugService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -40,21 +48,29 @@ public class DrugController {
 
     @PostMapping("/order/createOrder")
     @ResponseStatus(HttpStatus.OK)
+    @Transactional
     public Mono<MessageResponse> createOrder(@RequestBody OrderRequest orderRequest) {
+        Map<Pair<Long, Long>, Integer> drugMap = new HashMap<>();
 
-        // юзается генератор заказов
-
-        /*
-        Пример использования reduceQuantity, чтобы убавить количество каждого купленного товара
-
-        for (PharmacyDrug drug : drugs) {
-            drugService.reduceQuantity(drug.getPharmacyId(), drug.getPharmacyId(), drugs.size());
+        for (PharmacyDrug drug : orderRequest.getDrugs()) {
+            Pair<Long, Long> key = Pair.of(drug.getPharmacyId(), drug.getDrugId());
+            drugMap.put(key, drugMap.getOrDefault(key, 0) + drug.getQuantity());
         }
 
-         */
-
-        return null;
+        return Flux.fromIterable(drugMap.entrySet())
+                .flatMapSequential(entry -> drugService.reduceQuantity(entry.getKey().getLeft(), entry.getKey().getRight(), entry.getValue()))
+                .then(Mono.just(new MessageResponse("Заказ успешно обработан")))
+                .onErrorResume(e -> {
+                    System.err.println("Ошибка при создании заказа: " + e.getMessage());
+                    if (e instanceof ResponseStatusException) {
+                        return Mono.error(e);
+                    } else {
+                        return Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера"));
+                    }
+                });
     }
+
+
 
 
 

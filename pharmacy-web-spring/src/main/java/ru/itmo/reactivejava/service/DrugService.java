@@ -1,7 +1,9 @@
 package ru.itmo.reactivejava.service;
 
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.mapper.DrugMapper;
@@ -40,11 +42,16 @@ public class DrugService {
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Лекарство не найдено")))
                 .flatMap(entity -> {
                     if (entity.getQuantity() < quantity) {
-                        return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, ""));
+                        return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Недостаточно лекарств в наличии"));
                     }
-                    entity.setQuantity(entity.getQuantity() - quantity);
-                    return pharmacyDrugRepository.save(entity);
+                    int newQuantity = entity.getQuantity() - quantity;
+                    return pharmacyDrugRepository.updateQuantity(pharmacyId, drugId, newQuantity);
                 })
-                .then();
+                .flatMap(rowsUpdated -> {
+                    if (rowsUpdated == 0) {
+                        return Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Обновление не удалось"));
+                    }
+                    return Mono.empty();
+                });
     }
 }
