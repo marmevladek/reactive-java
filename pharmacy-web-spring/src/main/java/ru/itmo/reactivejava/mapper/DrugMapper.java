@@ -10,7 +10,8 @@ public class DrugMapper {
         return new Drug(
                 drugRequest.getName(),
                 drugRequest.getManufactureDate(),
-                drugRequest.getExpirationDate()
+                drugRequest.getExpirationDate(),
+                drugRequest.getPrice()
         );
     }
 }

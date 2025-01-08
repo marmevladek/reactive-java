@@ -19,4 +19,7 @@ public class DrugRequest {
 
     @JsonProperty("expiration_date")
     private LocalDate expirationDate;
+
+    @JsonProperty("price")
+    private float price;
 }

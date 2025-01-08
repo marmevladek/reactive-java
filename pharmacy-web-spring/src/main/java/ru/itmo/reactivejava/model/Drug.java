@@ -32,10 +32,14 @@ public class Drug {
     @Column("expiration_date")
     private LocalDate expirationDate;
 
-    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate) {
+    @Column("price")
+    private float price;
+
+    public Drug(String name, LocalDate manufactureDate, LocalDate expirationDate, float price) {
         this.name = name;
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
+        this.price = price;
     }
 
 }

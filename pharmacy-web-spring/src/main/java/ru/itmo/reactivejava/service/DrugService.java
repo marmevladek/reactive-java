@@ -7,8 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.mapper.DrugMapper;
+import ru.itmo.reactivejava.mapper.PharmacyDrugMapper;
+import ru.itmo.reactivejava.mapper.PharmacyMapper;
+import ru.itmo.reactivejava.model.Drug;
 import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
+import ru.itmo.reactivejava.payload.request.PharmacyDrugRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
 import ru.itmo.reactivejava.repository.DrugRepository;
 import ru.itmo.reactivejava.repository.PharmacyDrugRepository;
@@ -32,9 +36,9 @@ public class DrugService {
 
 
     public Mono<Float> findPrice(long pharmacyId, long drugId) {
-        return pharmacyDrugRepository.findByPharmacyIdAndDrugId(pharmacyId, drugId)
+        return drugRepository.findById(drugId)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Лекарство не найдено")))
-                .map(PharmacyDrug::getPrice);
+                .map(Drug::getPrice);
     }
 
     public Mono<Void> reduceQuantity(Long pharmacyId, Long drugId, int quantity) {
