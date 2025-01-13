@@ -1,0 +1,12 @@
+services:
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ../../pharmacy-web-react:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: ["sh", "-c", "npm install && npm start"]
+    environment:
+      - CHOKIDAR_USEPOLLING=true
