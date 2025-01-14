@@ -22,18 +22,9 @@ public class Pharmacy {
     @Column("address")
     private String address;
 
-    @Column("latitude")
-    private String latitude;
-
-    @Column("longitude")
-    private String longitude;
-
-    public Pharmacy(String name, String address, String latitude, String longitude) {
+    public Pharmacy(String name, String address) {
         this.name = name;
         this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
-
 }
 

@@ -8,9 +8,7 @@ public class PharmacyMapper {
     public static Pharmacy mapToPharmacy(PharmacyRequest pharmacyRequest) {
         return new Pharmacy(
                 pharmacyRequest.getName(),
-                pharmacyRequest.getAddress(),
-                pharmacyRequest.getLatitude(),
-                pharmacyRequest.getLongitude()
+                pharmacyRequest.getAddress()
         );
     }
 

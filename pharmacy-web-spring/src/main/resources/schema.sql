@@ -9,9 +9,7 @@ CREATE TABLE drug (
 CREATE TABLE pharmacy (
                           id BIGSERIAL PRIMARY KEY,
                           name VARCHAR(255) NOT NULL,
-                          address VARCHAR(255) NOT NULL,
-                          latitude DECIMAL(9,6),
-                          longitude DECIMAL(9,6)
+                          address VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE pharmacy_drug (
