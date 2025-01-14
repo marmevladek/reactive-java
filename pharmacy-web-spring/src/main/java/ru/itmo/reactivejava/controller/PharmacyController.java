@@ -3,6 +3,7 @@ package ru.itmo.reactivejava.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.payload.request.PharmacyRequest;
 import ru.itmo.reactivejava.payload.response.MessageResponse;
@@ -31,6 +32,13 @@ public class PharmacyController {
                 });
     }
 
+    @PostMapping("/generate")
+    public Flux<MessageResponse> generatePharmacies(@RequestParam int count) {
+        return pharmacyService.generatePharmacies(count);
+    }
+
+
+
     @GetMapping("/")
     public Mono<ResponseEntity<List<PharmacyResponse>>> getPharmacies() {
         return pharmacyService.getPharmacies()
@@ -43,4 +51,5 @@ public class PharmacyController {
                 .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
                 .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
 }

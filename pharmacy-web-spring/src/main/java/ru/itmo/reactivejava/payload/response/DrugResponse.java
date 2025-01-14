@@ -1,9 +1,7 @@
 package ru.itmo.reactivejava.payload.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import ru.itmo.reactivejava.service.DrugService;
 
 import java.time.LocalDate;
 
@@ -11,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DrugResponse {
     private Long id;
     private String name;

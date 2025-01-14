@@ -6,6 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import ru.itmo.reactivejava.mapper.DrugMapper;
 import ru.itmo.reactivejava.mapper.PharmacyDrugMapper;
+import ru.itmo.reactivejava.model.PharmacyDrug;
 import ru.itmo.reactivejava.payload.request.DrugRequest;
 import ru.itmo.reactivejava.payload.request.PharmacyDrugRequest;
 import ru.itmo.reactivejava.payload.response.DrugResponse;
@@ -40,14 +41,24 @@ public class DrugService {
                 .map(savedDrug -> new MessageResponse("Поставка успешно добавлена"));
     }
 
-    public Mono<List<PharmacyDrugResponse>> getDrugsFromPharmacy(long id) {
-        return pharmacyDrugRepository.findByPharmacyId(id)
+    public Mono<List<PharmacyDrugResponse>> getDrugsFromPharmacy(long pharmacyId) {
+        return pharmacyDrugRepository.findByPharmacyId(pharmacyId)
                 .flatMap(pharmacyDrug ->
                         drugRepository.findById(pharmacyDrug.getDrugId())
-                                .map(drug -> {
-                                    DrugResponse drugResponse = DrugMapper.mapToDrugResponse(drug);
-                                    return PharmacyDrugMapper.mapToPharmacyDrugResponse(pharmacyDrug, drugResponse);
-                                })
+                                .flatMap(drug ->
+                                        findPrice(pharmacyId, drug.getId())
+                                                .map(price -> {
+                                                    DrugResponse drugResponse = DrugResponse.builder()
+                                                            .id(drug.getId())
+                                                            .name(drug.getName())
+                                                            .manufactureDate(drug.getManufactureDate())
+                                                            .expirationDate(drug.getExpirationDate())
+                                                            .price(Math.round(price * 100) / 100f)
+                                                            .build();
+
+                                                    return PharmacyDrugMapper.mapToPharmacyDrugResponse(pharmacyDrug, drugResponse);
+                                                })
+                                )
                 )
                 .collectList();
     }
@@ -56,7 +67,7 @@ public class DrugService {
     public Mono<Float> findPrice(long pharmacyId, long drugId) {
         return drugRepository.findById(drugId)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Лекарство не найдено")))
+                        HttpStatus.NOT_FOUND, "Лекарство не найдено" + drugId)))
 
                 .flatMap(drug -> pharmacyDrugRepository.findByPharmacyIdAndDrugId(pharmacyId, drugId)
                         .switchIfEmpty(Mono.error(new ResponseStatusException(
@@ -101,7 +112,7 @@ public class DrugService {
 
     public Mono<Void> reduceQuantity(Long pharmacyId, Long drugId, int quantity) {
         return pharmacyDrugRepository.findByPharmacyIdAndDrugId(pharmacyId, drugId)
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Лекарство не найдено")))
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Лекарство не найдено: " + drugId + " " + pharmacyId )))
                 .flatMap(entity -> {
                     if (entity.getQuantity() < quantity) {
                         return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Недостаточно лекарств в наличии"));
@@ -115,5 +126,11 @@ public class DrugService {
                     }
                     return Mono.empty();
                 });
+    }
+
+    public Mono<Long> checkDrugStock() {
+        return pharmacyDrugRepository.findAll()
+                .map(PharmacyDrug::getQuantity)
+                .reduce(0L, Long::sum);
     }
 }

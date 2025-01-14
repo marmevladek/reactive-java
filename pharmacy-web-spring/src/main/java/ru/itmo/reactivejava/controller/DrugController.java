@@ -64,9 +64,10 @@ public class DrugController {
     @GetMapping("/drugs/{pharmacyId}")
     public Mono<ResponseEntity<List<PharmacyDrugResponse>>> getDrugsFromPharmacy(@PathVariable("pharmacyId") long pharmacyId) {
         return drugService.getDrugsFromPharmacy(pharmacyId)
-                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
-                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))  // Если есть данные
+                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());  // Если данных нет
     }
+
 
     @PostMapping("/order/createOrder")
     @ResponseStatus(HttpStatus.OK)

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api'; // Укажите ваш бэкенд
+const API_BASE_URL = 'http://localhost:8080/api';
 
 export const getPharmacies = async () => {
     const response = await axios.get(`${API_BASE_URL}/pharmacy/`);
@@ -15,9 +15,9 @@ export const getMedicinesByPharmacy = async (pharmacyId) => {
 export const findPrice = async (pharmacyId, drugId) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/drugs/getPrice/${pharmacyId}/${drugId}`);
-        return response.data; // Вернёт цену
+        return response.data;
     } catch (error) {
         console.error(`Ошибка при получении цены: ${error.message}`);
-        return null; // Возвращаем null в случае ошибки
+        return null; 
     }
 };

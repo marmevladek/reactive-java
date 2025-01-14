@@ -3,7 +3,6 @@ package ru.itmo.reactivejava.payload.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -18,8 +17,8 @@ public class PharmacyRequest {
     private String address;
 
     @JsonProperty("latitude")
-    private float latitude;
+    private String latitude;
 
     @JsonProperty("longitude")
-    private float longitude;
+    private String longitude;
 }

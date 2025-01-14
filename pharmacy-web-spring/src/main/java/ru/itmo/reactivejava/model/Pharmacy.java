@@ -23,12 +23,12 @@ public class Pharmacy {
     private String address;
 
     @Column("latitude")
-    private float latitude;
+    private String latitude;
 
     @Column("longitude")
-    private float longitude;
+    private String longitude;
 
-    public Pharmacy(String name, String address,float latitude, float longitude) {
+    public Pharmacy(String name, String address, String latitude, String longitude) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;

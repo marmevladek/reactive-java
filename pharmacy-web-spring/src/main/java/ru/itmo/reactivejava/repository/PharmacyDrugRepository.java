@@ -11,6 +11,7 @@ import ru.itmo.reactivejava.model.PharmacyDrug;
 @Repository
 public interface PharmacyDrugRepository extends ReactiveCrudRepository<PharmacyDrug, Long> {
     Flux<PharmacyDrug> findByPharmacyId(Long pharmacyId);
+    Mono<PharmacyDrug> deleteByPharmacyIdAndDrugId(Long pharmacyId, Long drugId);
     Flux<PharmacyDrug> findByDrugId(Long drugId);
     Mono<PharmacyDrug> findByPharmacyIdAndDrugId(Long pharmacyId, Long drugId);
 
