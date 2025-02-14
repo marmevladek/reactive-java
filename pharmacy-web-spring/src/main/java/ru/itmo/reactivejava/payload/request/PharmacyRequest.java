@@ -15,10 +15,4 @@ public class PharmacyRequest {
 
     @JsonProperty("address")
     private String address;
-
-    @JsonProperty("latitude")
-    private String latitude;
-
-    @JsonProperty("longitude")
-    private String longitude;
 }

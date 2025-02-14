@@ -39,8 +39,6 @@ public class PharmacyService {
                     Pharmacy pharmacy = new Pharmacy();
                     pharmacy.setName(faker.medical().hospitalName());
                     pharmacy.setAddress(faker.address().streetAddress());
-                    pharmacy.setLatitude(faker.address().latitude());
-                    pharmacy.setLongitude(faker.address().longitude());
                     return pharmacy;
                 })
                 .toList();
